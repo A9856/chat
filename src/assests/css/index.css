@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+*{
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background:linear-gradient(#F4F0FF,DACDFF)
+}
+
+/* Floating Chat Icon */
+.chatbot-toggler {
+    position: fixed;
+    bottom: 20px;
+    right:30px;
+    background-color: #6D4FC2;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Chatbot Popup (initially hidden) */
+  .chatbot-popup {
+    position: fixed;
+    bottom: 90px;
+    right:50px;
+    width: 360px;
+    height: 620px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
+    opacity: 0;
+    /* transform: scale(0.95); */
+    transform: scale(0.2);
+
+    transform-origin: bottom right;
+  }
+   
+.chatbot-popup .show #chatbot-toggler{
+    transform: rotate(90deg);
+}
+
+#chatbot-toggler span:last-child,
+.chatbot-popup .show #chatbot-toggler span:first-child{
+    opacity: 0;
+}
+
+.chatbot-popup .show #chatbot-toggler span:last-child{
+    opacity: 1;
+}
+
+  /* Show chatbot popup */
+  .chatbot-popup.show {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  
+  /* Chat Header */
+  .chat-header {
+    background-color: #6C47FF;
+    color: white;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Chat Body */
+  .chat-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+  }
+  
+  
+  .chat-footer {
+    padding: 12px;
+    border-top: 1px solid #eee;
+  }
+  
+
+.chatbot-popup .chat-header{
+    display: flex;
+    padding: 15px 22px;
+    align-items: center;
+    justify-content: space-between;
+    background: #6D4FC2;
+
+}
+.chat-header .header-info{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.header-info svg{
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    background: #fff;
+    border-radius: 50%;
+    flex-shrink: 0;
+    fill: #6D4FC2;
+}
+.header-info .logo-text{
+    color: #fff;
+    font-size: 1.31rem;
+    font-weight: 600;
+}
+.chat-header button{
+    height: 40px;
+    width: 40px;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.9 rem;
+    padding-top: 2px;
+    margin-right: -10px;
+    background:none;
+    transition: 0.2ease;
+
+    border-radius: 50%;
+}
+.chat-header button:hover{
+    background: #593bab;
+}
+.chat-body{
+    height: 460px;
+    overflow-y: auto;
+    margin-bottom: 82px;
+    padding: 25px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #DDD3F9 transparent;
+}
+.chat-body .message{
+    display: flex;
+    gap:11px;
+    align-items: center;
+}
+
+.message-text.error-text {
+    color: red;
+    font-weight: bold;
+  }
+  
+.chat-body .bot-message svg{
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    background: #6D4FC2;
+    border-radius: 50%;
+    margin-bottom: 2px;
+    flex-shrink: 0;
+    fill: #fff;
+    align-self: flex-end;   
+}
+.chat-body .message .message-text{
+    padding: 12px 16px;
+    max-width: 75%;
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 0.95rem;
+}
+.chat-body .bot-message .message-text{
+    background: #F6F2FF;
+    border-radius: 13px 13px 13px 13px;
+}
+.chat-body .user-message{
+    flex-direction:column;
+    align-items: flex-end;
+}
+.chat-body .user-message .message-text{
+    background: #6D4FC2;
+    border-radius: 13px 13px 13px 13px;
+    color: #fff;
+}
+.chat-footer{
+    position: absolute;
+    bottom: 0;width: 100%;
+    background: #fff;
+    padding: 15px 22px 20px;
+}
+.chat-footer .chat-form{
+    display: flex;
+    align-items: center;
+    border-radius: 32px;
+    background: #fff;
+    outline: 1px solid #CCCCE5;
+    box-shadow: 0 0 8px rgba(0,0,0,0.06);
+}
+
+.chat-footer .chat-form:focus-within{
+outline: 2px solid #6D4FC2;
+}
+
+.chat-form .message-input{
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    height: 47px;
+    padding: 0 17px;
+    font-size: 0.95rem;
+}
+.chat-form button{
+    height: 35px;width: 35px;
+    /* display: none; */
+    color: #fff;
+    background: #6D4FC2;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border:none;
+    outline: none;
+    font-size: 1.15rem;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: 0.2 ease;
+}
+.chat-form button:hover{
+    background: #593bab;
+
+}
+
+ @media (max-width:620px){
+    #chatbot-toggler{
+        right:20px;
+        bottom:20px;
+    }
+    .chatbot-popup{
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+    }
+    .chatbot-popup .chat-header{
+        padding:12px 15px;
+
+    }
+    .chat-body{
+        height:calc(90%-55px);
+        padding:25px 15px;
+    }
+    .chat-footer{
+        padding: 10px 15px 15px;
+    }
+ }
+ @media screen and (min-width: 481px) and (max-width: 768px) {
+    .chatbot-popup {
+      width: 90%;
+      height: 500px;
+      right: 5%;
+      bottom: 80px;
+    }
+  } 
+   @media screen and (max-width: 480px) {
+    .chatbot-popup {
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  
+    .chatbot-toggler {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      bottom: 15px;
+      right: 15px;
+    }
+  } 
+   @media screen and (min-width: 769px) {
+    .chatbot-popup {
+      width: 70%;margin: auto;
+      height: 550px;
+    }
+  } 
+  
